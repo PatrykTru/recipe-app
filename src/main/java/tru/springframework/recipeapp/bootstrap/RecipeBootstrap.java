@@ -1,9 +1,11 @@
 package tru.springframework.recipeapp.bootstrap;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import tru.springframework.recipeapp.domain.*;
 import tru.springframework.recipeapp.repositories.CategoryRepository;
 import tru.springframework.recipeapp.repositories.RecipeRepository;
@@ -13,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -25,16 +27,19 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         this.recipeRepository = recipeRepository;
         this.categoryRepository = categoryRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
+        log.debug("im a bootstrap Contructor");
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
+        log.debug("i am onApplicationEvent");
     }
 
     private List<Recipe> getRecipes(){
        List<Recipe> recipes = new ArrayList<>(2);
-
+        log.debug("I am getRecipes method");
        Optional<UnitOfMeasure> eachUomOptional = unitOfMeasureRepository.findByDescription("Each");
        if(!eachUomOptional.isPresent())
            throw new RuntimeException("Expected UOM not found");
