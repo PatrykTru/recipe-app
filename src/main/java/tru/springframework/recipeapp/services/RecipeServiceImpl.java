@@ -6,6 +6,7 @@ import tru.springframework.recipeapp.domain.Recipe;
 import tru.springframework.recipeapp.repositories.RecipeRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 @Slf4j
 @Service
@@ -25,4 +26,16 @@ public class RecipeServiceImpl implements RecipeService{
 
         return recipeSet;
     }
-}
+
+    @Override
+    public Recipe findById(Long l) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(l);
+
+        if (!recipeOptional.isPresent()) {
+            throw new RuntimeException("Recipe Not Found!");
+        }
+
+        return recipeOptional.get();
+    }
+    }
+
