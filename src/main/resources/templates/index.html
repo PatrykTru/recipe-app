@@ -48,6 +48,7 @@
                                 <td><a href="#">View</a> </td>
 
                             </tr>
+                            <!--/*@thymesVar id="recipe" type="tru.springframework.recipeapp.domain.Recipe"*/-->
                             <tr th:each="recipe: ${recipes}">
                                 <td th:text="${recipe.id}">121233</td>
                                 <td th:text="${recipe.description}">opis</td>
