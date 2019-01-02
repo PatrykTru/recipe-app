@@ -1,5 +1,6 @@
 package tru.springframework.recipeapp.converters;
 
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand , Recipe> 
         this.categoryConverter = categoryConverter;
         this.ingredientConverter = ingredientConverter;
     }
+    @Synchronized
     @Nullable
     @Override
     public Recipe convert(RecipeCommand source) {
@@ -37,7 +39,7 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand , Recipe> 
         recipe.setCookTime(source.getCookTime());
         recipe.setPrepTime(source.getPrepTime());
         recipe.setDifficulty(source.getDifficulty());
-        recipe.setImage(source.getImage());
+
 
         if(source.getCategories()!=null && source.getCategories().size()>0)
         {
