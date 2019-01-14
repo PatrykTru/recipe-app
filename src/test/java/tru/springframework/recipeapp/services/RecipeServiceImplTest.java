@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
-public class RecipeServiceImplIT {
+public class RecipeServiceImplTest {
 
 
     RecipeServiceImpl recipeService;
@@ -69,4 +69,14 @@ public class RecipeServiceImplIT {
         verify(recipeRepository, never()).findById(anyLong());
     }
 
+    @Test
+    public void deleteRecipeTest() throws Exception{
+        Long idToDelete = Long.valueOf(2l);
+
+        recipeService.deleteById(idToDelete);
+
+    //no when since method is void
+
+        verify(recipeRepository,times(1)).deleteById(anyLong());
+    }
 }

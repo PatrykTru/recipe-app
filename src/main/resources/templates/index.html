@@ -19,6 +19,8 @@
 </head>
 <body>
 
+<!--/*@thymesVar id="recipe" type="tru.springframework.recipeapp.domain.Recipe"*/-->
+<!--/*@thymesVar id="recipes" type="java.util.List"*/-->
 
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
@@ -34,6 +36,9 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Description</th>
+                                <th>View</th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
 
@@ -41,11 +46,16 @@
                                 <td>12223</td>
                                 <td>Tasty Godness 1</td>
                                 <td><a href="#">View</a> </td>
+                                <td>Update</td>
+                                <td>Delete</td>
                             </tr>
                             <tr th:remove="all">
                             <td>123313</td>
                             <td>">Tasty Godness 1</td>
                                 <td><a href="#">View</a> </td>
+                                <td>Update</td>
+                                <td>Delete</td>
+
 
                             </tr>
                             <!--/*@thymesVar id="recipe" type="tru.springframework.recipeapp.domain.Recipe"*/-->
@@ -53,8 +63,10 @@
                                 <td th:text="${recipe.id}">121233</td>
                                 <td th:text="${recipe.description}">opis</td>
 
-                                <td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}"
+                                <td><a href="#" th:href="@{'/recipe/' +${recipe.id}+ '/show' }"
                                 >View</a> </td>
+                                <td><a href="#" th:href="@{'/recipe/'+${recipe.id} + '/update'}">Update</a> </td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a> </td>
 
                             </tr>
                         </table>

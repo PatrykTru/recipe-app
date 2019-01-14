@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tru.springframework.recipeapp.services.RecipeService;
+
 @Slf4j
 @Controller
 public class IndexController {
