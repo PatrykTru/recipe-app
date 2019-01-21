@@ -1,5 +1,6 @@
 package tru.springframework.recipeapp.converters;
 
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -14,19 +15,22 @@ public class IngredientToIngredientCommand implements Converter<Ingredient, Ingr
     public IngredientToIngredientCommand(UnitOfMeasureToUnitOfMeasureCommand uomConverter) {
         this.uomConverter = uomConverter;
     }
-
+    @Synchronized
     @Nullable
     @Override
-    public IngredientCommand convert(Ingredient source) {
-        if(source == null)
-        return null;
+    public IngredientCommand convert(Ingredient ingredient) {
+        if (ingredient == null) {
+            return null;
+        }
 
         IngredientCommand ingredientCommand = new IngredientCommand();
-        ingredientCommand.setAmount(source.getAmount());
-        ingredientCommand.setDescription(source.getDescription());
-        ingredientCommand.setId(source.getId());
-        ingredientCommand.setUnitOfMeasureCommand(uomConverter.convert(source.getUnitOfMeasure()));
-
+        ingredientCommand.setId(ingredient.getId());
+        if (ingredient.getRecipe() != null) {
+            ingredientCommand.setRecipeId(ingredient.getRecipe().getId());
+        }
+        ingredientCommand.setAmount(ingredient.getAmount());
+        ingredientCommand.setDescription(ingredient.getDescription());
+        ingredientCommand.setUnitOfMeasureCommand(uomConverter.convert(ingredient.getUnitOfMeasure()));
         return ingredientCommand;
     }
 }
