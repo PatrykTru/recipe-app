@@ -22,6 +22,9 @@ public class Recipe {
     @Lob
     private String directions;
 
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "recipe")
+    private Set<Ingredient> ingredients = new HashSet<>();
+
     @Lob
     private Byte[] image;
     @Enumerated(value = EnumType.STRING)
@@ -31,8 +34,7 @@ public class Recipe {
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
-    @OneToMany(cascade = CascadeType.ALL , mappedBy = "recipe")
-    private Set<Ingredient> ingredients = new HashSet<>();
+
 
     @ManyToMany
     @JoinTable(name = "recipe_category",

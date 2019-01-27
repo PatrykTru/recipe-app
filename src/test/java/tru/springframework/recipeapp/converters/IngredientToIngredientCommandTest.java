@@ -52,7 +52,7 @@ public class IngredientToIngredientCommandTest {
         assertEquals(AMOUNT,ingredientCommand.getAmount());
         assertEquals(DESCRIPTION , ingredientCommand.getDescription());
         assertEquals(ID_VALUE , ingredientCommand.getId());
-        assertEquals(UOM_ID , ingredientCommand.getUnitOfMeasureCommand().getId());
+        assertEquals(UOM_ID , ingredientCommand.getUom().getId());
 
     }
 
@@ -69,7 +69,7 @@ public class IngredientToIngredientCommandTest {
         assertEquals(AMOUNT,ingredientCommand.getAmount());
         assertEquals(DESCRIPTION , ingredientCommand.getDescription());
         assertEquals(ID_VALUE , ingredientCommand.getId());
-        assertNull(ingredientCommand.getUnitOfMeasureCommand());
+        assertNull(ingredientCommand.getUom());
         assertNotNull(ingredientCommand);
 
     }
