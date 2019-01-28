@@ -18,36 +18,39 @@
 </head>
 
 <body>
-<div class="container-fluid" style="margin-left: -20px">
+
+<div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <!--/*@thymesVar id="ingredients" type="java.util.Set<tru.springframework.recipeapp.commands.IngredientCommand>"*/-->
-
-            <form th:object="${ingredient}" th:action="${'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'}">
-                <input type="hidden" th:field="*{description}"/>
-                <div class="panel-group">
+            <!--/*@thymesVar id="ingredient" type="tru.springframework.recipeapp.commands.IngredientCommand"*/-->
+            <form  th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} " method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="pannel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h1 class="panel-title">Edit Ingredient Information</h1>
                         </div>
                         <div class="panel-body">
+
+
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Description</label>
-                                    <input type="number" class="form-control" th:field="*{description}"/>
+                                    <label>Description:</label>
+                                    <input type="text" class="form-control" th:field="*{description}"/>
                                 </div>
 
-                                <div class="form-group col-md-3">
-                                    <label>Amount</label>
+                                <div class="col-md-3 form-group">
+                                    <label>Amount:</label>
+                                    <input type="number" class="form-control" th:field="*{amount}"/>
+                                </div>
+
+                                <div class="col-md-3 form-group">
+                                    <label>UOM:</label>
                                     <select class="form-control" name="uom.id">
-                                        <option
-                                                th:each="uomEach: ${uomList}"
+                                        <option th:each="uomEach : ${uomList}"
                                                 th:value="${uomEach.id}"
-                                                th:selected="${uomEach.equals()ingredient.unitOfMeasure}"
-                                                th:text="${uomEach.description}">Each
-
-                                        </option>
-
+                                                th:selected="${uomEach.id.equals(ingredient.uom.id)}"
+                                                th:text="${uomEach.description}">Each</option>
                                     </select>
                                 </div>
                             </div>
@@ -59,6 +62,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

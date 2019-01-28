@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tru.springframework.recipeapp.commands.IngredientCommand;
+import tru.springframework.recipeapp.commands.RecipeCommand;
+import tru.springframework.recipeapp.commands.UnitOfMeasureCommand;
 import tru.springframework.recipeapp.services.IngredientService;
 import tru.springframework.recipeapp.services.RecipeService;
 import tru.springframework.recipeapp.services.UnitOfMeasureService;
@@ -40,6 +42,23 @@ public class IngredientController {
 
         model.addAttribute("ingredient" , ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId),Long.valueOf(id)));
         return "recipe/ingredient/show";
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newIngredient(@PathVariable String recipeId , Model model){
+        //checking id value
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+        //todo raise exception if null
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+        model.addAttribute("uomList",unitOfMeasureService.listAllUoms());
+
+
+        return "recipe/ingredient/ingredientform";
     }
     @GetMapping
     @RequestMapping("recipe/{recipeId}/ingredient/{id}/update")
