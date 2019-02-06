@@ -7,6 +7,7 @@ import tru.springframework.recipeapp.commands.RecipeCommand;
 import tru.springframework.recipeapp.converters.RecipeCommandToRecipe;
 import tru.springframework.recipeapp.converters.RecipeToRecipeCommand;
 import tru.springframework.recipeapp.domain.Recipe;
+import tru.springframework.recipeapp.exceptions.NotFoundException;
 import tru.springframework.recipeapp.repositories.RecipeRepository;
 
 import java.util.HashSet;
@@ -44,7 +45,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
         if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe Not Found!");
+            throw new NotFoundException("Recipe Not Found!");
         }
 
         return recipeOptional.get();

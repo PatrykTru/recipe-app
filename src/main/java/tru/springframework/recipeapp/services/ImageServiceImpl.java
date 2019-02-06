@@ -40,6 +40,7 @@ public class ImageServiceImpl implements ImageService{
         }
         catch (IOException e)
         {
+            //todo handle better
             log.debug("problem with imageFile");
             e.printStackTrace();
         }

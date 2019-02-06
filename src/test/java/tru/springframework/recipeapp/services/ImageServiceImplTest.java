@@ -34,14 +34,12 @@ public class ImageServiceImplTest {
     @Test
     public void saveImageFile() throws Exception {
         Long id = 1l;
-        MultipartFile file = new MockMultipartFile("image" , "texting.txt" , "text/plain" ,
+        MultipartFile file = new MockMultipartFile("imagefile" , "texting.txt" , "text/plain" ,
                 "Spring Framework Guru".getBytes());
 
         Recipe recipe = new Recipe();
         recipe.setId(id);
-
         Optional<Recipe> recipeOptional = Optional.of(recipe);
-
 
         when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
 

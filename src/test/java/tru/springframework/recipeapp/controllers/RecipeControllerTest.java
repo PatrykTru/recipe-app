@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tru.springframework.recipeapp.commands.RecipeCommand;
 import tru.springframework.recipeapp.domain.Recipe;
+import tru.springframework.recipeapp.exceptions.NotFoundException;
 import tru.springframework.recipeapp.services.RecipeService;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -23,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by jt on 6/19/17.
  */
 public class RecipeControllerTest {
+
 
 
     @Mock
@@ -55,6 +57,17 @@ public class RecipeControllerTest {
                 .andExpect(model().attributeExists("recipe"));
 
     }
+
+    @Test
+    public void getRecipeNotFound() throws Exception{
+
+
+                when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+                mockMvc.perform(get("/recipe/1/show"))
+                        .andExpect(status().isNotFound());
+    }
+
 
     @Test
     public void testGetNewRecipeForm() throws Exception{
