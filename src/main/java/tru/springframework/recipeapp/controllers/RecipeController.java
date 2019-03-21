@@ -29,6 +29,7 @@ public class RecipeController {
 
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
 
+
         return "recipe/show";
     }
     @GetMapping("recipe/new")
@@ -49,6 +50,7 @@ public class RecipeController {
     public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult){
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(recipeCommand);
 
+        System.out.println(recipeCommand.getId());
         if(bindingResult.hasErrors())
         {
             bindingResult.getAllErrors().forEach(objectError

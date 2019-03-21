@@ -9,7 +9,6 @@ import tru.springframework.recipeapp.domain.Category;
 
 @Component
 public class CategoryToCategoryComand implements Converter<Category, CategoryCommand> {
-
     @Synchronized
     @Nullable
     @Override
